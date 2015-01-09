@@ -1,6 +1,7 @@
 package cabz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,16 +13,15 @@ import cabz.constants.UserType;
 import cabz.dto.User;
 import cabz.service.AccountService;
 
-
 @Controller
-@RequestMapping("/account")
-public class AccountServiceController {
-
+@RequestMapping("/api")
+@Secured("ROLE_USER")
+public class BookingController {
 	@Autowired 
 	private AccountService accountService;
 	
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-    public @ResponseBody JsonRestObject getJsonRestObject(@RequestParam("email") String email,@RequestParam("mobileno") String mobileno
+	@RequestMapping(value = "/booking/new", method = RequestMethod.POST)
+    public @ResponseBody JsonRestObject createBooking(@RequestParam("email") String email,@RequestParam("mobileno") String mobileno
     		,@RequestParam("userType") String userType, @RequestParam("password") String password) {
         
 		User user = new User();
@@ -34,4 +34,7 @@ public class AccountServiceController {
 		
 		return new JsonRestObject(true);
     }
+
+	
+	
 }

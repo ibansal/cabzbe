@@ -1,5 +1,7 @@
 package cabz.dto;
 
+import cabz.constants.UserType;
+
 public class User {
 
 	private String   id;
@@ -15,7 +17,9 @@ public class User {
     private String   email;
     
     private String   mobileno;
-
+    
+    private String address;
+    
 	public String getId() {
 		return id;
 	}
@@ -70,6 +74,14 @@ public class User {
 
 	public void setMobileno(String mobileno) {
 		this.mobileno = mobileno;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
     
     
