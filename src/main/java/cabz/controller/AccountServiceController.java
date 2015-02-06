@@ -19,9 +19,9 @@ public class AccountServiceController {
 
 	@Autowired 
 	private AccountService accountService;
-	
+
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public @ResponseBody JsonRestObject getJsonRestObject(@RequestParam("email") String email,@RequestParam("mobileno") String mobileno
+     public @ResponseBody JsonRestObject createUser(@RequestParam("email") String email,@RequestParam("mobileno") String mobileno
     		,@RequestParam("userType") String userType, @RequestParam("password") String password) {
         
 		User user = new User();
@@ -35,10 +35,17 @@ public class AccountServiceController {
 		return new JsonRestObject(true);
     }
 	
-	@RequestMapping(value = "/verify_email", method = RequestMethod.GET)
-	@RequestMapping(value = "/verify_mobile", method = RequestMethod.GET)
-	@RequestMapping(value = "/otp_verify", method = RequestMethod.GET)
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	
-	
+
+//	@RequestMapping(value = "/verify_email", method = RequestMethod.GET)
+//	@RequestMapping(value = "/verify_mobile", method = RequestMethod.GET)
+//	@RequestMapping(value = "/otp_verify", method = RequestMethod.GET)
+//	@RequestMapping(value = "/login", method = RequestMethod.GET)
+//	
+
+	@RequestMapping(value = "/email-unique", method = RequestMethod.GET)
+    public @ResponseBody JsonRestObject createUser(@RequestParam("email") String email) {
+        
+		boolean isEmailExsist=accountService.isEmailAlreadyExist(email);
+		return new JsonRestObject(isEmailExsist);
+    }
 }

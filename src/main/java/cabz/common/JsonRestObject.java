@@ -3,12 +3,7 @@ package cabz.common;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * User: Joseph Vartuli
- * Date: 25/08/12
- *
- * @since:
- */
+
 public class JsonRestObject {
 
     private Integer id;
