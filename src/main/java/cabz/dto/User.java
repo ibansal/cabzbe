@@ -20,6 +20,27 @@ public class User {
     
     private String address;
     
+    private String image;
+    
+    private IdentityProof idDetails;
+    
+    
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public IdentityProof getIdDetails() {
+		return idDetails;
+	}
+
+	public void setIdDetails(IdentityProof idDetails) {
+		this.idDetails = idDetails;
+	}
+
 	public String getId() {
 		return id;
 	}

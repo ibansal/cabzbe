@@ -1,5 +1,5 @@
 package cabz.constants;
 
 public enum UserType {
-	USER, ADMIN, DRIVER, AGENT
+	USER, ADMIN, VENDOR, CS
 }
