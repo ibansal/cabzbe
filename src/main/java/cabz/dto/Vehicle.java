@@ -23,6 +23,9 @@ public class Vehicle {
     private long	startDate;
     
     private List<Inspection> 	inspections;
+    
+    private String gpsDetails;
+    
 
 	public String getId() {
 		return id;
@@ -94,6 +97,14 @@ public class Vehicle {
 
 	public void setInspections(List<Inspection> inspections) {
 		this.inspections = inspections;
+	}
+
+	public String getGpsDetails() {
+		return gpsDetails;
+	}
+
+	public void setGpsDetails(String gpsDetails) {
+		this.gpsDetails = gpsDetails;
 	}
     
      

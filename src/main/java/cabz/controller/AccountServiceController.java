@@ -20,7 +20,7 @@ public class AccountServiceController {
 	@Autowired 
 	private AccountService accountService;
 	
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
     public @ResponseBody JsonRestObject getJsonRestObject(@RequestParam("email") String email,@RequestParam("mobileno") String mobileno
     		,@RequestParam("userType") String userType, @RequestParam("password") String password) {
         
@@ -34,4 +34,11 @@ public class AccountServiceController {
 		
 		return new JsonRestObject(true);
     }
+	
+	@RequestMapping(value = "/verify_email", method = RequestMethod.GET)
+	@RequestMapping(value = "/verify_mobile", method = RequestMethod.GET)
+	@RequestMapping(value = "/otp_verify", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	
+	
 }

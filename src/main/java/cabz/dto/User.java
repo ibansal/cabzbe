@@ -24,6 +24,27 @@ public class User {
     
     private IdentityProof idDetails;
     
+    private String 		otp;
+    
+    private String 		referralCode;
+    
+    public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+
+	public long getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(long createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	private long     createdAt;
     
 	public String getImage() {
 		return image;

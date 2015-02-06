@@ -32,6 +32,8 @@ public class Booking {
     private String dropLocality;
 
     private String dropAddress;
+    
+    private int noOfCustomers;
 
 	public String getId() {
 		return id;
@@ -151,6 +153,14 @@ public class Booking {
 
 	public void setDropAddress(String dropAddress) {
 		this.dropAddress = dropAddress;
+	}
+
+	public int getNoOfCustomers() {
+		return noOfCustomers;
+	}
+
+	public void setNoOfCustomers(int noOfCustomers) {
+		this.noOfCustomers = noOfCustomers;
 	}
     
 
