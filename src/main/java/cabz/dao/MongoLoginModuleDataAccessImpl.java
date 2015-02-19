@@ -1,40 +1,52 @@
 package cabz.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import cabz.dto.User;
+import static cabz.constants.JSONKeyNames.*;
 
 public class MongoLoginModuleDataAccessImpl implements LoginModuleDataAccess{
 	
 	 @Autowired
 	 private MongoTemplate mongoCabzDB;
 
-	@Override
 	public void createUser(User user) {
-		// TODO Auto-generated method stub
-		
 		user.setLastUpdated(System.currentTimeMillis());
 		mongoCabzDB.save(user);
-		
 	}
 
-	@Override
 	public boolean isEmailIDExist(String email) {
-		// TODO Auto-generated method stub
-		return false;
+		MongoOperations oper = mongoCabzDB;
+        long count = oper.count(Query.query(Criteria.where(EMAIL_ID).is(email)), User.class);
+        return count > 0;
 	}
 
-	@Override
 	public boolean isMobileExist(String mobileNo) {
-		// TODO Auto-generated method stub
-		return false;
+		MongoOperations oper = mongoCabzDB;
+        long count = oper.count(Query.query(Criteria.where(MOBILE_NO).is(mobileNo)), User.class);
+        return count > 0;
 	}
 
-	@Override
-	public boolean validateOTP(String otp) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean validateOTP(String otp, String email) {
+		MongoOperations oper = mongoCabzDB;
+		Query query = Query.query(Criteria.where(OTP).is(otp).and(EMAIL_ID).is(email));
+		long count = oper.count(query, User.class);
+		if(count > 0){
+			oper.updateMulti(query, Update.update(IS_VERIFIED, true), User.class);
+		}
+        return count > 0;
+	}
+
+	public boolean verifyUser(String email, String password) {
+		MongoOperations oper = mongoCabzDB;
+        long count = oper.count(Query.query(Criteria.where(EMAIL_ID).is(email).and(PASSWORD).is(password)), User.class);
+        return count > 0;
+		
 	}
 
 }

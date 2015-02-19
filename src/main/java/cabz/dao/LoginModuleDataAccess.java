@@ -10,8 +10,8 @@ public interface LoginModuleDataAccess {
 	
 	public boolean isMobileExist(String mobileNo);
 	
-	public boolean validateOTP(String otp);
+	public boolean validateOTP(String otp, String email);
 	
-	
+	public boolean verifyUser(String email, String password);
 
 }
