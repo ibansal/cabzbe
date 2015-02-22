@@ -8,4 +8,5 @@ public class JSONKeyNames {
 	public static final String OTP = "otp";
 	public static final String IS_VERIFIED = "isVerified";
 	public static final String PASSWORD = "password";
+	public static final String VENDOR_EMAIL = "vendorEmail";
 }

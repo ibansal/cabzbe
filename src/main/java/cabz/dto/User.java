@@ -144,5 +144,4 @@ public class User {
 		this.isVerified = isVerified;
 	}
     
-    
 }

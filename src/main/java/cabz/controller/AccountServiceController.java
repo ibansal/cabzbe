@@ -64,4 +64,14 @@ public class AccountServiceController {
 		return new JsonRestObject(isValidated);
     }
 	
+	
+	@RequestMapping(value = "/updateprofile", method = RequestMethod.GET)
+    public @ResponseBody JsonRestObject updateProfile(@RequestParam("email") String email,@RequestParam("mobileno") String mobileno
+    		,@RequestParam("userType") String userType, @RequestParam("password") String password) {
+        
+		accountService.updateProfile(email, mobileno, userType, password);
+		return new JsonRestObject(true);
+    }
+	
+	
 }

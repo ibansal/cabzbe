@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.mongodb.QueryBuilder;
 
+import cabz.constants.UserType;
 import cabz.dao.LoginModuleDataAccess;
 import cabz.dto.User;
 
@@ -22,6 +23,14 @@ public class AccountService {
 		loginModuleDataAccess.createUser(user);
 		//send the otp via sms
 		sendOTP(user.getMobileno());
+	}
+	
+	public User getUserMobileNo(String mobileNo){
+		return loginModuleDataAccess.getUserByMobileNo(mobileNo);
+	}
+	
+	public User getUserByEmail(String emailId){
+		return loginModuleDataAccess.getUserByEmail(emailId);
 	}
 	
 	private void sendOTP(String mobileno) {
@@ -48,12 +57,20 @@ public class AccountService {
 	}
 	
 	public boolean validateOTP(String otp, String emailId){
-		
 		return loginModuleDataAccess.validateOTP(otp, emailId);	
 	}
-	
 	
 	public boolean login(String email, String password){
 		return loginModuleDataAccess.verifyUser(email, password);
 	}
+	
+	public void updateProfile(String email, String mobileNo, String userType, String password){
+		User user = getUserByEmail(email);
+		user.setMobileno(mobileNo);
+		UserType type = UserType.valueOf(userType);
+		user.setUserType(type);
+		user.setPassword(password);
+		loginModuleDataAccess.updateUser(user);
+	}
+	
 }

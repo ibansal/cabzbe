@@ -19,6 +19,11 @@ public class MongoLoginModuleDataAccessImpl implements LoginModuleDataAccess{
 		user.setLastUpdated(System.currentTimeMillis());
 		mongoCabzDB.save(user);
 	}
+	
+	public void updateUser(User user) {
+		user.setLastUpdated(System.currentTimeMillis());
+		mongoCabzDB.save(user);
+	}
 
 	public boolean isEmailIDExist(String email) {
 		MongoOperations oper = mongoCabzDB;
@@ -47,6 +52,16 @@ public class MongoLoginModuleDataAccessImpl implements LoginModuleDataAccess{
         long count = oper.count(Query.query(Criteria.where(EMAIL_ID).is(email).and(PASSWORD).is(password)), User.class);
         return count > 0;
 		
+	}
+
+	public User getUserByMobileNo(String mobileNo) {
+		MongoOperations oper = mongoCabzDB;
+		return oper.findOne(Query.query(Criteria.where(MOBILE_NO).is(mobileNo)), User.class);
+	}
+
+	public User getUserByEmail(String email) {
+		MongoOperations oper = mongoCabzDB;
+        return oper.findOne(Query.query(Criteria.where(EMAIL_ID).is(email)), User.class);
 	}
 
 }
