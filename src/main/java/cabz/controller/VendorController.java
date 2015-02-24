@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import cabz.common.JsonRestObject;
+import cabz.dto.Driver;
 import cabz.dto.User;
 import cabz.dto.Vehicle;
 import cabz.service.AccountService;
@@ -28,37 +31,36 @@ public class VendorController {
 
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public @ResponseBody JsonRestObject getProfile(@RequestParam("email") String email, @RequestParam("password") String password) {
+	public @ResponseBody String getProfile(@RequestParam("email") String email, @RequestParam("password") String password) {
 
 		User user = accountService.getUserByEmail(email);
-		//TODO: return json object, use gson
-		//return user.toString();
-		return new JsonRestObject(true);
+		Gson gson = new Gson();
+		String userJson = gson.toJson(user);
+		return userJson;
 	}
 
 	@RequestMapping(value = "/inventory", method = RequestMethod.GET)
-	public @ResponseBody JsonRestObject getInventory(@RequestParam("email") String email) {
+	public @ResponseBody String getInventory(@RequestParam("email") String email) {
 		List<Vehicle> vehicles = vendorService.getVehiclesByVendor(email);
-//		Gson gson = new Gson();	
-//		gson.toJson(vehicles);
-		return new JsonRestObject(true);
+		Gson gson = new Gson();	
+		return gson.toJson(vehicles);
 	}
 
 	@RequestMapping(value = "/driverlist", method = RequestMethod.GET)
-	public @ResponseBody JsonRestObject getDrivers(@RequestParam("email") String email) {
-		List<Vehicle> vehicles = vendorService.getVehiclesByVendor(email);
-		//return user.toString();
-		return new JsonRestObject(true);
+	public @ResponseBody String getDrivers(@RequestParam("email") String email) {
+		List<Driver> drivers = vendorService.getDriversByVendor(email);
+		Gson gson = new Gson();
+		return gson.toJson(drivers);
 	}
 
-	//TODO: check the kind of params needed for this methos
+	//TODO: check the kind of params needed for this method
 	@RequestMapping(value = "/updatecab", method = RequestMethod.POST)
 	public @ResponseBody JsonRestObject updateCab(@RequestParam("email") String email) {
 		//TODO: update details for the particular cab
 		return new JsonRestObject(true);
 	}
 
-	//TODO: check the kind of params needed for this methos
+	//TODO: check the kind of params needed for this method
 	@RequestMapping(value = "/addnewcab", method = RequestMethod.POST)
 	public @ResponseBody JsonRestObject addNewCab(@RequestParam("email") String email) {
 		//TODO: update details for the particular cab
