@@ -18,6 +18,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import cabz.common.PropertyReader;
 import cabz.dao.LoginModuleDataAccess;
 import cabz.dao.MongoAdminModuleDataAccessImpl;
+import cabz.dao.MongoVendorModuleDataAccessImpl;
+import cabz.dao.VendorModuleDataAccess;
 
 import com.mongodb.MongoClient;
 
@@ -58,5 +60,9 @@ public class ConfigurationService extends WebMvcConfigurerAdapter
     	return (LoginModuleDataAccess) new MongoAdminModuleDataAccessImpl();
     }
     
+    @Bean
+    public VendorModuleDataAccess vendorModuleDataAccess() throws Exception{
+    	return (VendorModuleDataAccess) new MongoVendorModuleDataAccessImpl();
+    }
 
 }

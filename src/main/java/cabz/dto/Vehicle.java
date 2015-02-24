@@ -5,27 +5,29 @@ import java.util.List;
 import cabz.constants.ServiceCategory;
 
 public class Vehicle {
-	
+
 	private String   id;
 
-    private String   registrationNo;
+	private String  vendorEmail;
 
-    private String   makeYear;
+	private String   registrationNo;
 
-    private long     dateOfRegistration;
+	private String   makeYear;
 
-    private ServiceCategory vehicleType;
+	private long     dateOfRegistration;
 
-    private List<String>   images;
-    
-    private String   vehicleCompany;
-    
-    private long	startDate;
-    
-    private List<Inspection> 	inspections;
-    
-    private String gpsDetails;
-    
+	private ServiceCategory vehicleType;
+
+	private List<String>   images;
+
+	private String   vehicleCompany;
+
+	private long	startDate;
+
+	private List<Inspection> 	inspections;
+
+	private String gpsDetails;
+
 
 	public String getId() {
 		return id;
@@ -106,7 +108,15 @@ public class Vehicle {
 	public void setGpsDetails(String gpsDetails) {
 		this.gpsDetails = gpsDetails;
 	}
-    
-     
+
+	public String getVendorEmail() {
+		return vendorEmail;
+	}
+
+	public void setVendorEmail(String vendorEmail) {
+		this.vendorEmail = vendorEmail;
+	}
+
+
 
 }

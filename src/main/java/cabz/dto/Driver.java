@@ -1,7 +1,7 @@
 package cabz.dto;
 
 public class Driver extends User{
-	private String vendorId;
+	private String vendorEmail;
 	
 	private String verificationAdminId;
 	
@@ -11,12 +11,12 @@ public class Driver extends User{
 	
 	private int yearsOfExperiance;
 
-	public String getVendorId() {
-		return vendorId;
+	public String getVendorEmail() {
+		return vendorEmail;
 	}
 
-	public void setVendorId(String vendorId) {
-		this.vendorId = vendorId;
+	public void setVendorEmail(String vendorId) {
+		this.vendorEmail = vendorId;
 	}
 
 	public String getVerificationAdminId() {

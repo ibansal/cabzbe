@@ -36,16 +36,42 @@ public class AccountServiceController {
     }
 	
 
-//	@RequestMapping(value = "/verify_email", method = RequestMethod.GET)
-//	@RequestMapping(value = "/verify_mobile", method = RequestMethod.GET)
-//	@RequestMapping(value = "/otp_verify", method = RequestMethod.GET)
-//	@RequestMapping(value = "/login", method = RequestMethod.GET)
-//	
-
-	@RequestMapping(value = "/email-unique", method = RequestMethod.GET)
-    public @ResponseBody JsonRestObject createUser(@RequestParam("email") String email) {
+	@RequestMapping(value = "/checkifemailunique", method = RequestMethod.GET)
+    public @ResponseBody JsonRestObject checkIfEmailUnique(@RequestParam("email") String email) {
         
 		boolean isEmailExsist=accountService.isEmailAlreadyExist(email);
 		return new JsonRestObject(isEmailExsist);
     }
+	
+	@RequestMapping(value = "/checkifmobileunique", method = RequestMethod.GET)
+    public @ResponseBody JsonRestObject checkIfMobileUnique(@RequestParam("mobile") String mobileNo) {
+        
+		boolean isEmailExsist=accountService.isEmailAlreadyExist(mobileNo);
+		return new JsonRestObject(isEmailExsist);
+    }
+	
+	@RequestMapping(value = "/verifyOtp", method = RequestMethod.GET)
+    public @ResponseBody JsonRestObject verifyOtp(@RequestParam("otp") String otp, @RequestParam("userId") String userId) {
+        
+		boolean isValidated=accountService.validateOTP(otp, userId);
+		return new JsonRestObject(isValidated);
+    }
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+    public @ResponseBody JsonRestObject login(@RequestParam("email") String email, @RequestParam("password") String password) {
+        
+		boolean isValidated=accountService.validateOTP(email, password);
+		return new JsonRestObject(isValidated);
+    }
+	
+	
+	@RequestMapping(value = "/updateprofile", method = RequestMethod.GET)
+    public @ResponseBody JsonRestObject updateProfile(@RequestParam("email") String email,@RequestParam("mobileno") String mobileno
+    		,@RequestParam("userType") String userType, @RequestParam("password") String password) {
+        
+		accountService.updateProfile(email, mobileno, userType, password);
+		return new JsonRestObject(true);
+    }
+	
+	
 }

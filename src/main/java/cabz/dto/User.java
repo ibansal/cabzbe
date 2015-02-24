@@ -28,6 +28,8 @@ public class User {
     
     private String 		referralCode;
     
+    private boolean 	isVerified;
+    
     public String getOtp() {
 		return otp;
 	}
@@ -125,6 +127,21 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-    
+
+	public String getReferralCode() {
+		return referralCode;
+	}
+
+	public void setReferralCode(String referralCode) {
+		this.referralCode = referralCode;
+	}
+
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
     
 }
