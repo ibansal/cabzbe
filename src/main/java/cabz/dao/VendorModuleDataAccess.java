@@ -11,4 +11,8 @@ public interface VendorModuleDataAccess {
 	
 	public List<Driver> getVendorsDrivers(String email);
 
+	public Vehicle getVehicleByRegistrationNo(String registrationNo);
+	
+	public void createUpdateVehicle(Vehicle vehicle);
+	
 }

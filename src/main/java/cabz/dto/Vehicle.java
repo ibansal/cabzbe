@@ -27,7 +27,17 @@ public class Vehicle {
 	private List<Inspection> 	inspections;
 
 	private String gpsDetails;
+	
+	private long lastUpdated;
 
+
+	public long getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(long lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
 
 	public String getId() {
 		return id;

@@ -1,6 +1,6 @@
 package cabz.dao;
 
-import static cabz.constants.JSONKeyNames.VENDOR_EMAIL;
+import static cabz.constants.JSONKeyNames.*;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import cabz.dto.Driver;
+import cabz.dto.User;
 import cabz.dto.Vehicle;
 
 public class MongoVendorModuleDataAccessImpl implements VendorModuleDataAccess{
@@ -28,6 +29,19 @@ public class MongoVendorModuleDataAccessImpl implements VendorModuleDataAccess{
 	public List<Driver> getVendorsDrivers(String email) {
 		MongoOperations oper = mongoCabzDB;
 		return  oper.find(Query.query(Criteria.where(VENDOR_EMAIL).is(email)), Driver.class);
+	}
+
+
+	public Vehicle getVehicleByRegistrationNo(String registrationNo) {
+		MongoOperations oper = mongoCabzDB;
+		return  oper.findOne(Query.query(Criteria.where(REGISTRATION_NO).is(registrationNo)), Vehicle.class);
+	}
+
+
+	public void createUpdateVehicle(Vehicle vehicle) {
+		vehicle.setLastUpdated(System.currentTimeMillis());
+		mongoCabzDB.save(vehicle);
+
 	}
 
 }

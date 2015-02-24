@@ -9,4 +9,5 @@ public class JSONKeyNames {
 	public static final String IS_VERIFIED = "isVerified";
 	public static final String PASSWORD = "password";
 	public static final String VENDOR_EMAIL = "vendorEmail";
+	public static final String REGISTRATION_NO = "registrationNo";
 }

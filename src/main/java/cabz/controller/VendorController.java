@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import cabz.common.JsonResponseObject;
 import cabz.common.JsonRestObject;
+import cabz.constants.ServiceCategory;
 import cabz.dto.Driver;
+import cabz.dto.Inspection;
 import cabz.dto.User;
 import cabz.dto.Vehicle;
 import cabz.service.AccountService;
@@ -53,25 +56,32 @@ public class VendorController {
 		return gson.toJson(drivers);
 	}
 
-	//TODO: check the kind of params needed for this method
 	@RequestMapping(value = "/updatecab", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject updateCab(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
+	public @ResponseBody JsonResponseObject updateCab(@RequestParam("email") String email,
+			@RequestParam("registrationNo") String registrationNo,@RequestParam("makeYear") String makeYear,
+			@RequestParam("dateOfRegistration") long dateOfRegistration,@RequestParam("vehicleType") ServiceCategory vehicleType,
+			@RequestParam("vehicleCompany") String vehicleCompany,@RequestParam("inspections") Inspection inspections,
+			@RequestParam("images") List<String> image,@RequestParam("gpsDetails") String gpsDetails) {
+		
+		JsonResponseObject jsonResponseObject = vendorService.updateCabDetails(email,registrationNo,makeYear,dateOfRegistration,vehicleType,vehicleCompany,inspections,image,gpsDetails);
+		return jsonResponseObject;
 	}
 
-	//TODO: check the kind of params needed for this method
 	@RequestMapping(value = "/addnewcab", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject addNewCab(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
+	public @ResponseBody JsonResponseObject addNewCab(@RequestParam("email") String email,
+			@RequestParam("registrationNo") String registrationNo,@RequestParam("makeYear") String makeYear,
+			@RequestParam("dateOfRegistration") long dateOfRegistration,@RequestParam("vehicleType") ServiceCategory vehicleType,
+			@RequestParam("vehicleCompany") String vehicleCompany,@RequestParam("inspections") Inspection inspections,
+			@RequestParam("images") List<String> image,@RequestParam("gpsDetails") String gpsDetails) {
+		
+		JsonResponseObject jsonResponseObject = vendorService.addNewCabDetails(email,registrationNo,makeYear,dateOfRegistration,vehicleType,vehicleCompany,inspections,image,gpsDetails);
+		return jsonResponseObject;
 	}
 
-	//TODO: check the kind of params needed for this methos
 	@RequestMapping(value = "/associatecab", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject associateCab(@RequestParam("email") String email) {
+	public @ResponseBody JsonRestObject associateCab(@RequestParam("registrationNo") String registrationNo,@RequestParam("tripId") String tripId) {
 		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
+				return new JsonRestObject(true);
 	}
 
 	//TODO: check the kind of params needed for this methos
