@@ -17,10 +17,11 @@ public class Trip {
 
     private long     waitTime;
     
-    private String   vehicleId;
+    private String   vehicleRegistrationNo;
     
     private float     totalKm;
     
+    private long 	lastUpdated;
     
     private String paymentId;
 
@@ -80,12 +81,12 @@ public class Trip {
 		this.waitTime = waitTime;
 	}
 
-	public String getVehicleId() {
-		return vehicleId;
+	public String getVehicleRegistrationNo() {
+		return vehicleRegistrationNo;
 	}
 
-	public void setVehicleId(String vehicleId) {
-		this.vehicleId = vehicleId;
+	public void setVehicleRegistrationNo(String vehicleRegistrationNo) {
+		this.vehicleRegistrationNo = vehicleRegistrationNo;
 	}
 
 	public float getTotalKm() {
@@ -103,8 +104,12 @@ public class Trip {
 	public void setPaymentId(String paymentId) {
 		this.paymentId = paymentId;
 	}
-    
-    
-    
-    
+
+	public long getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(long lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
 }

@@ -62,7 +62,7 @@ public class VendorController {
 			@RequestParam("dateOfRegistration") long dateOfRegistration,@RequestParam("vehicleType") ServiceCategory vehicleType,
 			@RequestParam("vehicleCompany") String vehicleCompany,@RequestParam("inspections") Inspection inspections,
 			@RequestParam("images") List<String> image,@RequestParam("gpsDetails") String gpsDetails) {
-		
+
 		JsonResponseObject jsonResponseObject = vendorService.updateCabDetails(email,registrationNo,makeYear,dateOfRegistration,vehicleType,vehicleCompany,inspections,image,gpsDetails);
 		return jsonResponseObject;
 	}
@@ -73,45 +73,31 @@ public class VendorController {
 			@RequestParam("dateOfRegistration") long dateOfRegistration,@RequestParam("vehicleType") ServiceCategory vehicleType,
 			@RequestParam("vehicleCompany") String vehicleCompany,@RequestParam("inspections") Inspection inspections,
 			@RequestParam("images") List<String> image,@RequestParam("gpsDetails") String gpsDetails) {
-		
+
 		JsonResponseObject jsonResponseObject = vendorService.addNewCabDetails(email,registrationNo,makeYear,dateOfRegistration,vehicleType,vehicleCompany,inspections,image,gpsDetails);
 		return jsonResponseObject;
 	}
 
-	@RequestMapping(value = "/associatecab", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject associateCab(@RequestParam("registrationNo") String registrationNo,@RequestParam("tripId") String tripId) {
-		//TODO: update details for the particular cab
-				return new JsonRestObject(true);
+	@RequestMapping(value = "/updatecabfortrip", method = RequestMethod.POST)
+	public @ResponseBody JsonResponseObject updatecabfortrip(@RequestParam("registrationNo") String registrationNo,@RequestParam("tripId") String tripId) {
+		JsonResponseObject updateCab2Trip = vendorService.updateCab4Trip(registrationNo, tripId);
+		return updateCab2Trip;
 	}
 
-	//TODO: check the kind of params needed for this methos
-	@RequestMapping(value = "/disassociatecab", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject disassociateCab(@RequestParam("email") String email) {
+	@RequestMapping(value = "/updatedriverfortrip", method = RequestMethod.POST)
+	public @ResponseBody JsonResponseObject updatedriverfortrip(@RequestParam("driverId") String driverId,@RequestParam("tripId") String tripId) {
+		JsonResponseObject updateCab2Trip = vendorService.updateCab4Trip(driverId, tripId);
+		return updateCab2Trip;
+	}
+	
+	@RequestMapping(value = "/acceptbooking", method = RequestMethod.POST)
+	public @ResponseBody JsonRestObject acceptBooking(@RequestParam("email") String email) {
 		//TODO: update details for the particular cab
 		return new JsonRestObject(true);
 	}
 
-	//TODO: check the kind of params needed for this methos
-	@RequestMapping(value = "/adddriver", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject addDriver(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
-	}
-	
-	@RequestMapping(value = "/updatedriverdetails", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject updateDriverDetails(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
-	}
-	
-	@RequestMapping(value = "/associatedrivertoride", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject associateDriverToRide(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
-	}
-	
-	@RequestMapping(value = "/updatedrivertoride", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject updateDriverToRide(@RequestParam("email") String email) {
+	@RequestMapping(value = "/rejectbooking", method = RequestMethod.POST)
+	public @ResponseBody JsonRestObject rejectBooking(@RequestParam("email") String email) {
 		//TODO: update details for the particular cab
 		return new JsonRestObject(true);
 	}
@@ -121,47 +107,25 @@ public class VendorController {
 		//TODO: update details for the particular cab
 		return new JsonRestObject(true);
 	}
-	
+
 	@RequestMapping(value = "/createdeal", method = RequestMethod.POST)
 	public @ResponseBody JsonRestObject createDeal(@RequestParam("email") String email) {
 		//TODO: update details for the particular cab
 		return new JsonRestObject(true);
 	}
-	
+
 	@RequestMapping(value = "/updatedeal", method = RequestMethod.POST)
 	public @ResponseBody JsonRestObject updateDeal(@RequestParam("email") String email) {
 		//TODO: update details for the particular cab
 		return new JsonRestObject(true);
 	}
-	
+
 	@RequestMapping(value = "/deletedeal", method = RequestMethod.POST)
 	public @ResponseBody JsonRestObject deleteDeal(@RequestParam("email") String email) {
 		//TODO: update details for the particular cab
 		return new JsonRestObject(true);
 	}
+
 	
-	@RequestMapping(value = "/associatecabtoride", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject associateCabToRide(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
-	}
-	
-	@RequestMapping(value = "/updatecabtoride", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject updateCabToRide(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
-	}
-	
-	@RequestMapping(value = "/acceptbooking", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject acceptBooking(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
-	}
-	
-	@RequestMapping(value = "/rejectbooking", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject rejectBooking(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
-	}
-	
+
 }

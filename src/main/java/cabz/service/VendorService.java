@@ -15,6 +15,7 @@ import cabz.constants.ServiceCategory;
 import cabz.dao.VendorModuleDataAccess;
 import cabz.dto.Driver;
 import cabz.dto.Inspection;
+import cabz.dto.Trip;
 import cabz.dto.Vehicle;
 
 
@@ -129,10 +130,25 @@ public class VendorService {
 		return new JsonResponseObject("successfully added",true);
 	}
 
-//	public String associateCab2Trip(String registrationNo, String tripId){
-//		
-//	}
-//	
+	public JsonResponseObject updateCab4Trip(String registrationNo, String tripId){
+		Trip trip = vendorModuleDataAccess.getTripDetailsById(tripId);
+		if(trip == null){
+			return new JsonResponseObject("Failed updating, trip not found",false);
+		}
+		trip.setVehicleRegistrationNo(registrationNo);
+		vendorModuleDataAccess.updateTripDetails(trip);
+		return new JsonResponseObject("Successfully updated",true);
+	}
+	
+	public JsonResponseObject updateDriver4Trip(String driverId, String tripId){
+		Trip trip = vendorModuleDataAccess.getTripDetailsById(tripId);
+		if(trip == null){
+			return new JsonResponseObject("Failed updating, trip not found",false);
+		}
+		trip.setDriverId(driverId);
+		vendorModuleDataAccess.updateTripDetails(trip);
+		return new JsonResponseObject("Successfully updated",true);
+	}
 
 }
 
