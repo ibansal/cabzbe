@@ -10,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.google.gson.JsonObject;
+
 import cabz.common.JsonResponseObject;
+import cabz.common.Utils;
 import cabz.constants.ServiceCategory;
 import cabz.dao.VendorModuleDataAccess;
+import cabz.dto.Deal;
 import cabz.dto.Driver;
 import cabz.dto.Inspection;
 import cabz.dto.Trip;
@@ -148,6 +152,81 @@ public class VendorService {
 		trip.setDriverId(driverId);
 		vendorModuleDataAccess.updateTripDetails(trip);
 		return new JsonResponseObject("Successfully updated",true);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Trip> getUpcommingTrips(String vendorEmail, int count, int pos) {
+		List<Trip> upcomingTrips = vendorModuleDataAccess.getUpcomingTrips(vendorEmail);
+		return Utils.getSublistForPage(upcomingTrips, count, pos);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Trip> getPastTrips(String vendorEmail, int count, int pos) {
+		List<Trip> upcomingTrips = vendorModuleDataAccess.getPastTrips(vendorEmail);
+		return Utils.getSublistForPage(upcomingTrips, count, pos);
+	}
+
+	public JsonResponseObject createNewDeal(String email, long dealTime, String source,
+			String destination, String vehicleRegistrationNo, String driverId) {
+		Deal deal = new Deal();
+		deal.setDealTime(dealTime);
+		deal.setOriginTripId(email);
+		deal.setSource(source);
+		deal.setDestination(destination);
+		deal.setDriverId(driverId);
+		vendorModuleDataAccess.createUpdateDeal(deal);
+		return new JsonResponseObject("Successfully created deal",true);
+	}
+
+	public JsonResponseObject updateDeal(String email, long dealTime,
+			String source, String destination, String vehicleRegistrationNo,
+			String driverId, String dealId) {
+
+		Deal deal = vendorModuleDataAccess.getDealById(dealId);
+		if(deal != null){
+			if(StringUtils.isNotBlank(email)){
+				if(!email.equalsIgnoreCase(deal.getOriginTripId())){
+					logger.info("Vendors email not matching with deal ID "+dealId+" vendor email "+email);
+					return new JsonResponseObject("Vendors email not matching with deal ID", false);
+				}
+			}
+			if(StringUtils.isNotBlank(source)){
+				deal.setSource(source);
+			}
+			if(StringUtils.isNotBlank(destination)){
+				deal.setDestination(destination);
+			}
+			if(dealTime > 0){
+				deal.setDealTime(dealTime);
+			}	
+			if(StringUtils.isNotBlank(vehicleRegistrationNo)){
+				deal.setVehicleRegistrationNo(vehicleRegistrationNo);
+			}
+			if(StringUtils.isNotBlank(driverId)){
+				deal.setDriverId(driverId);
+			}
+			vendorModuleDataAccess.createUpdateDeal(deal);
+			return new JsonResponseObject("success", true);
+		}
+		logger.error("Deal not found with Id "+ dealId);
+		return new JsonResponseObject("Deal not found", false);
+	}
+
+	public JsonResponseObject deleteDeal(String email, String dealId) {
+		Deal deal = vendorModuleDataAccess.getDealById(dealId);
+		if(deal != null && StringUtils.isNotBlank(email)){
+			if(StringUtils.isNotBlank(email)){
+				if(!email.equalsIgnoreCase(deal.getOriginTripId())){
+					logger.info("Vendors email not matching with deal ID "+dealId+" vendor email "+email);
+					return new JsonResponseObject("Vendors email not matching with deal ID", false);
+				}
+			}
+			deal.setDeleted(true);
+			vendorModuleDataAccess.createUpdateDeal(deal);
+			return new JsonResponseObject("success", true);
+		}
+		logger.error("Deal not found with Id or vendor email empty"+ dealId);
+		return new JsonResponseObject("Deal not found or vendor email empty", false);
 	}
 
 }

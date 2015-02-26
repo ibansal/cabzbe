@@ -9,17 +9,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-
 import cabz.common.JsonResponseObject;
 import cabz.common.JsonRestObject;
 import cabz.constants.ServiceCategory;
 import cabz.dto.Driver;
 import cabz.dto.Inspection;
+import cabz.dto.Trip;
 import cabz.dto.User;
 import cabz.dto.Vehicle;
 import cabz.service.AccountService;
 import cabz.service.VendorService;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 
 @Controller
@@ -92,38 +94,52 @@ public class VendorController {
 	
 	@RequestMapping(value = "/acceptbooking", method = RequestMethod.POST)
 	public @ResponseBody JsonRestObject acceptBooking(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
+		//TODO: to be done after booking code is implemented
 		return new JsonRestObject(true);
 	}
 
 	@RequestMapping(value = "/rejectbooking", method = RequestMethod.POST)
 	public @ResponseBody JsonRestObject rejectBooking(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
+		//TODO: to be done after booking code is implemented
 		return new JsonRestObject(true);
 	}
 	
-	@RequestMapping(value = "/getupcommingrides", method = RequestMethod.GET)
-	public @ResponseBody JsonRestObject getUpcommingRides(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
+	@RequestMapping(value = "/getupcommingtrips", method = RequestMethod.GET)
+	public @ResponseBody String getUpcommingTrips(@RequestParam("email") String vendorEmail,@RequestParam("count") int count,@RequestParam("pos") int pos) {
+		List<Trip> upcommingTrips = vendorService.getUpcommingTrips(vendorEmail, count, pos);
+		Gson gson = new Gson();
+		String tripsJson = gson.toJson(upcommingTrips);
+		return tripsJson;
+	}
+	
+	@RequestMapping(value = "/getpasttrips", method = RequestMethod.GET)
+	public @ResponseBody String getpastTrips(@RequestParam("email") String vendorEmail,@RequestParam("count") int count,@RequestParam("pos") int pos) {
+		List<Trip> upcommingTrips = vendorService.getPastTrips(vendorEmail, count, pos);
+		Gson gson = new Gson();
+		String tripsJson = gson.toJson(upcommingTrips);
+		return tripsJson;
 	}
 
 	@RequestMapping(value = "/createdeal", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject createDeal(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
+	public @ResponseBody JsonResponseObject createDeal(@RequestParam("email") String email,
+			@RequestParam("dealTime") long dealTime,@RequestParam("source") String source,
+			@RequestParam("destination") String destination,@RequestParam("vehicle") String vehicleRegistrationNo,
+			@RequestParam("driverId") String driverId){
+		
+		return vendorService.createNewDeal(email, dealTime, source, destination,vehicleRegistrationNo, driverId);
 	}
 
 	@RequestMapping(value = "/updatedeal", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject updateDeal(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
+	public @ResponseBody JsonResponseObject updateDeal(@RequestParam("email") String email,
+			@RequestParam("dealTime") long dealTime,@RequestParam("source") String source,
+			@RequestParam("destination") String destination,@RequestParam("vehicle") String vehicleRegistrationNo,
+			@RequestParam("driverId") String driverId, @RequestParam("dealId") String dealId){
+		return vendorService.updateDeal(email, dealTime, source, destination,vehicleRegistrationNo, driverId, dealId);
 	}
 
 	@RequestMapping(value = "/deletedeal", method = RequestMethod.POST)
-	public @ResponseBody JsonRestObject deleteDeal(@RequestParam("email") String email) {
-		//TODO: update details for the particular cab
-		return new JsonRestObject(true);
+	public @ResponseBody JsonResponseObject deleteDeal(@RequestParam("email") String email, @RequestParam("dealId") String dealId){
+		return vendorService.deleteDeal(email, dealId);
 	}
 
 	

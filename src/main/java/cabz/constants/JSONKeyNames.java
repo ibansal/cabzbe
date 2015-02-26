@@ -10,4 +10,6 @@ public class JSONKeyNames {
 	public static final String PASSWORD = "password";
 	public static final String VENDOR_EMAIL = "vendorEmail";
 	public static final String REGISTRATION_NO = "registrationNo";
+	public static final String START_TIME = "startTime";
+	public static final String LAST_UPDATED = "lastUpdated";
 }
