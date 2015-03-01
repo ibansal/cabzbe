@@ -14,8 +14,8 @@ import com.google.gson.JsonObject;
 
 import cabz.common.JsonResponseObject;
 import cabz.common.Utils;
-import cabz.constants.ServiceCategory;
 import cabz.dao.VendorModuleDataAccess;
+import cabz.dto.CategoryOfVehicle;
 import cabz.dto.Deal;
 import cabz.dto.Driver;
 import cabz.dto.Inspection;
@@ -40,7 +40,7 @@ public class VendorService {
 	}
 
 	public JsonResponseObject updateCabDetails(String email, String registrationNo, String makeYear, long dateOfRegistration
-			, ServiceCategory vehicleType, String vehicleCompany, Inspection inspection, List<String> images, String gpsDetails){
+			, CategoryOfVehicle vehicleType, String vehicleCompany, Inspection inspection, List<String> images, String gpsDetails){
 		Vehicle vehicle = vendorModuleDataAccess.getVehicleByRegistrationNo(registrationNo);
 		if(vehicle != null){
 			if(StringUtils.isNotBlank(email)){
@@ -88,7 +88,7 @@ public class VendorService {
 	}
 
 	public JsonResponseObject addNewCabDetails(String email, String registrationNo, String makeYear, long dateOfRegistration
-			, ServiceCategory vehicleType, String vehicleCompany, Inspection inspection, List<String> images, String gpsDetails){
+			, CategoryOfVehicle vehicleType, String vehicleCompany, Inspection inspection, List<String> images, String gpsDetails){
 		Vehicle vehicle = vendorModuleDataAccess.getVehicleByRegistrationNo(registrationNo);
 		if(StringUtils.isBlank(registrationNo)){
 			logger.error("registration no is emapty "+ registrationNo+" email "+email);

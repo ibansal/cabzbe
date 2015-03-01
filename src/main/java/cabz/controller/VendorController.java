@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cabz.common.JsonResponseObject;
 import cabz.common.JsonRestObject;
-import cabz.constants.ServiceCategory;
+import cabz.dto.CategoryOfVehicle;
 import cabz.dto.Driver;
 import cabz.dto.Inspection;
 import cabz.dto.Trip;
@@ -61,7 +61,7 @@ public class VendorController {
 	@RequestMapping(value = "/updatecab", method = RequestMethod.POST)
 	public @ResponseBody JsonResponseObject updateCab(@RequestParam("email") String email,
 			@RequestParam("registrationNo") String registrationNo,@RequestParam("makeYear") String makeYear,
-			@RequestParam("dateOfRegistration") long dateOfRegistration,@RequestParam("vehicleType") ServiceCategory vehicleType,
+			@RequestParam("dateOfRegistration") long dateOfRegistration,@RequestParam("vehicleType") CategoryOfVehicle vehicleType,
 			@RequestParam("vehicleCompany") String vehicleCompany,@RequestParam("inspections") Inspection inspections,
 			@RequestParam("images") List<String> image,@RequestParam("gpsDetails") String gpsDetails) {
 
@@ -72,7 +72,7 @@ public class VendorController {
 	@RequestMapping(value = "/addnewcab", method = RequestMethod.POST)
 	public @ResponseBody JsonResponseObject addNewCab(@RequestParam("email") String email,
 			@RequestParam("registrationNo") String registrationNo,@RequestParam("makeYear") String makeYear,
-			@RequestParam("dateOfRegistration") long dateOfRegistration,@RequestParam("vehicleType") ServiceCategory vehicleType,
+			@RequestParam("dateOfRegistration") long dateOfRegistration,@RequestParam("vehicleType") CategoryOfVehicle vehicleType,
 			@RequestParam("vehicleCompany") String vehicleCompany,@RequestParam("inspections") Inspection inspections,
 			@RequestParam("images") List<String> image,@RequestParam("gpsDetails") String gpsDetails) {
 

@@ -2,13 +2,13 @@ package cabz.dto;
 
 import java.util.Map;
 
-import cabz.constants.ServiceCategory;
+
 
 public class Vendor extends User{
 
 	private String serviceTaxNo;
 	
-	private Map<ServiceCategory, Integer> cabInventory;
+	private Map<CategoryOfVehicle, Integer> cabInventory;
 	
 	private Map<String,String> phoneNo;
 	

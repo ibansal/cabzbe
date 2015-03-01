@@ -2,7 +2,7 @@ package cabz.dto;
 
 import java.util.List;
 
-import cabz.constants.ServiceCategory;
+
 
 public class Vehicle {
 
@@ -16,7 +16,7 @@ public class Vehicle {
 
 	private long     dateOfRegistration;
 
-	private ServiceCategory vehicleType;
+	private CategoryOfVehicle vehicleType;
 
 	private List<String>   images;
 
@@ -29,6 +29,58 @@ public class Vehicle {
 	private String gpsDetails;
 	
 	private long lastUpdated;
+	
+	private List<String> permitOfState;
+	
+	private boolean isAirConditioned;
+	
+	private ClassOfRide coRide;
+	
+	private int noOfPassenger;
+	
+	
+	
+	public int getNoOfPassenger() {
+		return noOfPassenger;
+	}
+
+	public void setNoOfPassenger(int noOfPassenger) {
+		this.noOfPassenger = noOfPassenger;
+	}
+
+	public List<String> getPermitOfState() {
+		return permitOfState;
+	}
+
+	public void setPermitOfState(List<String> permitOfState) {
+		this.permitOfState = permitOfState;
+	}
+
+	public boolean isAirConditioned() {
+		return isAirConditioned;
+	}
+
+	public void setAirConditioned(boolean isAirConditioned) {
+		this.isAirConditioned = isAirConditioned;
+	}
+
+	public ClassOfRide getCoRide() {
+		return coRide;
+	}
+
+	public void setCoRide(ClassOfRide coRide) {
+		this.coRide = coRide;
+	}
+
+	public List<String> getTaxPaid() {
+		return taxPaid;
+	}
+
+	public void setTaxPaid(List<String> taxPaid) {
+		this.taxPaid = taxPaid;
+	}
+
+	private List<String> taxPaid;
 
 
 	public long getLastUpdated() {
@@ -71,11 +123,11 @@ public class Vehicle {
 		this.dateOfRegistration = dateOfRegistration;
 	}
 
-	public ServiceCategory getVehicleType() {
+	public CategoryOfVehicle getVehicleType() {
 		return vehicleType;
 	}
 
-	public void setVehicleType(ServiceCategory vehicleType) {
+	public void setVehicleType(CategoryOfVehicle vehicleType) {
 		this.vehicleType = vehicleType;
 	}
 

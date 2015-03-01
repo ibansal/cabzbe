@@ -1,6 +1,6 @@
 package cabz.dto;
 
-import cabz.constants.ServiceCategory;
+
 
 public class Booking {
 	private String   id;
@@ -23,7 +23,7 @@ public class Booking {
     
     private String 	  travellerMobile;
     
-    private ServiceCategory category;
+    private CategoryOfVehicle category;
     
     private String pickupLocality;
     
@@ -115,11 +115,11 @@ public class Booking {
 		this.travellerMobile = travellerMobile;
 	}
 
-	public ServiceCategory getCategory() {
+	public CategoryOfVehicle getCategory() {
 		return category;
 	}
 
-	public void setCategory(ServiceCategory category) {
+	public void setCategory(CategoryOfVehicle category) {
 		this.category = category;
 	}
 
